@@ -31,16 +31,35 @@ html , body,{
 .add-task{
 
 }
+.task-input{
+  margin-top: 10px;
+  width: 500px;
+  height: 30px;
+  font-size: 15px;
+}
+.add-button{
+  width: 200px;
+  height:36px;
+  font-size: 20px;
+  background: black;
+  color: white;
+  font-family: 'Lucida console';
+}
 .draggable-container{
   margin-top: 10px;
-  overflow-x: auto;
+  overflow-x: scroll;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
 }
 .planning, .inProgress, .testing, .complete{
     background: #222;
+    height: 600px;
+    margin: 10px;
+    width: 700px;
+    min-width: 250px;
 }
 #task-header-planning{
   background: #eee710;
@@ -68,8 +87,9 @@ html , body,{
 }
 
 .task-container{
-  overflow-y: auto;
+  overflow-y: scroll;
   background: #222;
+  height: 550px;
 }
 .task{
   font-family: 'Lucida console';
@@ -77,4 +97,6 @@ html , body,{
   color: white;
   margin: 10px;
   padding: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }

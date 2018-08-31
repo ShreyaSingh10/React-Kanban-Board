@@ -4,11 +4,16 @@ import './styles.css';
 export default class AppDragDropDemo extends Component {
   state = {
     tasks: [
-        {name:"Learn Angular",category:"planning"},
-        {name:"React", category:"planning"},
-        {name:"Vue", category:"inProgress"},
-        {name:"Learn Angular", category:"testing"},
-        {name:"Learn Vue", category:"complete"}
+        {name:"Asjdjjhjhjkhjhhkjhjhjhjhjhkjsdhhhfshfsfhsfhsdhfdsfhjdshfsdhfdfhkjjkhjhjhhjhjhjhkhkhkhkh",category:"planning"},
+        {name:"b", category:"planning"},
+        {name:"C", category:"inProgress"},
+        {name:"D", category:"testing"},
+        {name:"hhkhkhkh",category:"planning"},
+        {name:"bhghj", category:"planning"},
+        {name:"Chjgj", category:"inProgress"},
+        {name:"Dtrru", category:"testing"},
+        {name:"Learn Vue", category:"complete"},
+        {name:"Learn ", category:"complete"},
       ]
   }
 
@@ -65,8 +70,10 @@ export default class AppDragDropDemo extends Component {
         </div>
         <div className="container">
           <div className="add-task">
-            <input type="text" ></input>
-            <button>Add new task</button>
+            <form>
+              <input className="task-input" type="text" ></input>
+              <button className="add-button">Add new task</button>
+            </form>
           </div>
           <div className="draggable-container">
             <div className="planning"
