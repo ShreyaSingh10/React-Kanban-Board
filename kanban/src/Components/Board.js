@@ -4,7 +4,7 @@ import './styles.css';
 export default class AppDragDropDemo extends Component {
   state = {
     tasks: [
-        {name:"Asjdjjhjhjkhjhhkjhjhjhjhjhkjsdhhhfshfsfhsfhsdhfdsfhjdshfsdhfdfhkjjkhjhjhhjhjhjhkhkhkhkh",category:"planning"},
+        {name:"Ajsdhfkjdfhkjdhkdfkdjghkdjhgkdjhksehkhkhkhkh",category:"planning"},
         {name:"b", category:"planning"},
         {name:"C", category:"inProgress"},
         {name:"D", category:"testing"},
@@ -14,12 +14,21 @@ export default class AppDragDropDemo extends Component {
         {name:"Dtrru", category:"testing"},
         {name:"Learn Vue", category:"complete"},
         {name:"Learn ", category:"complete"},
-      ]
+      ],
+      task_name:'task_name',
+      stage1:'stage1',
+      stage2:'stage_2',
+      new_task:''
   }
 
-  onDragStart = (ev, id) => {
+  onDragStart = (ev, id,cat) => {
       console.log('dragstart:',id);
       ev.dataTransfer.setData("id", id);
+      this.setState({
+      task_name: id,
+      stage1: cat,
+      stage2:''
+    })
   }
 
   onDragOver = (ev) => {
@@ -40,6 +49,9 @@ export default class AppDragDropDemo extends Component {
          ...this.state,
          tasks
      });
+     this.setState({
+      stage2:cat
+    });
   }
 
   render() {
@@ -53,7 +65,7 @@ export default class AppDragDropDemo extends Component {
     this.state.tasks.forEach ((t) => {
       tasks[t.category].push(
         <div key={t.name}
-            onDragStart = {(e) => this.onDragStart(e, t.name)}
+            onDragStart = {(e) => this.onDragStart(e, t.name, t.category)}
             draggable
             className="draggable"
         >
@@ -66,7 +78,7 @@ export default class AppDragDropDemo extends Component {
       <div className="parent-container">
         <h2 className="header">Kanban Board</h2>
         <div className="nav-bar">
-          <p className="message"><b>Task Status: {this.state.task_name} moved from {this.state.message_from} to {this.state.message_to}</b> </p>
+          <p className="message"><b>Task Status: {this.state.task_name} moved from {this.state.stage1} to {this.state.stage2}</b> </p>
         </div>
         <div className="container">
           <div className="add-task">
