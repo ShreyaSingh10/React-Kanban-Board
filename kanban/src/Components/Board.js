@@ -53,12 +53,20 @@ export default class AppDragDropDemo extends Component {
       stage2:cat
     });
   }
-  
+
   handleChange= (e)=>{
     console.log("value", e.target.value);
     this.setState({
       new_task: e.target.value
     })
+  }
+  handleSubmit = (e)=>{
+    e.preventDefault();
+    const new_task ={
+      name: this.state.new_task,
+      category:"planning"
+    }
+    console.log("new_task",new_task);
   }
 
   render() {
@@ -89,7 +97,7 @@ export default class AppDragDropDemo extends Component {
         </div>
         <div className="container">
           <div className="add-task">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <input className="task-input" type="text" onChange={this.handleChange}></input>
               <button className="add-button">Add new task</button>
             </form>
