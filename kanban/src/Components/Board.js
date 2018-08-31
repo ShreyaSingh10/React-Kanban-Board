@@ -4,7 +4,7 @@ import './styles.css';
 export default class AppDragDropDemo extends Component {
   state = {
     tasks: [
-        {name:"Ajsdhfkjdfhkjdhkdfkdjghkdjhgkdjhksehkhkhkhkh",category:"planning"},
+        {name:"fdsfghjkljgfdfghjkjgdsdfghjkgfdsdfghjkjhgfdsfgjdfhkjdhkdfkdjghkdjhgkdjhksehkhkhkhkh",category:"planning"},
         {name:"b", category:"planning"},
         {name:"C", category:"inProgress"},
         {name:"D", category:"testing"},
@@ -105,7 +105,7 @@ export default class AppDragDropDemo extends Component {
         <div className="container">
           <div className="add-task">
             <form onSubmit={this.handleSubmit}>
-              <input className="task-input" type="text" onChange={this.handleChange}></input>
+              <input className="task-input" type="text" value={this.state.new_task} onChange={this.handleChange}></input>
               <button className="add-button">Add new task</button>
             </form>
           </div>
