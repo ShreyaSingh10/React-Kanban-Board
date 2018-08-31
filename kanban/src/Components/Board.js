@@ -53,6 +53,13 @@ export default class AppDragDropDemo extends Component {
       stage2:cat
     });
   }
+  
+  handleChange= (e)=>{
+    console.log("value", e.target.value);
+    this.setState({
+      new_task: e.target.value
+    })
+  }
 
   render() {
     var tasks = {
@@ -83,7 +90,7 @@ export default class AppDragDropDemo extends Component {
         <div className="container">
           <div className="add-task">
             <form>
-              <input className="task-input" type="text" ></input>
+              <input className="task-input" type="text" onChange={this.handleChange}></input>
               <button className="add-button">Add new task</button>
             </form>
           </div>
