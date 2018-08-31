@@ -6,12 +6,6 @@ html , body,{
 .parent-container{
   text-align: center;
 }
-.container{
-  text-align: center;
-  margin-top: 10px;
-  height:800px;
-  background: orange;
-}
 .header{
   margin:0;
   padding: 15px 0;
@@ -22,11 +16,65 @@ html , body,{
   color:#363337;
   font-family: 'Lucida console';
 }
+.nav-bar{
+  height: 40px;
+}
 .message{
   display: inline-block;
   background: ghostwhite;
-  padding:10px 10px 10px 55px;
-  margin:0 0 -10px 0;
-  text-align: left;
   font-family: 'Lucida console';
+}
+.container{
+  padding: 10px;
+  background: orange;
+}
+.add-task{
+
+}
+.draggable-container{
+  margin-top: 10px;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.planning, .inProgress, .testing, .complete{
+    background: #222;
+}
+#task-header-planning{
+  background: #eee710;
+  padding: 15px;
+  color: white;
+  font-family: 'Lucida console';
+}
+#task-header-progress{
+  background: #64dddd;
+  padding: 15px;
+  color: white;
+  font-family: 'Lucida console';
+}
+#task-header-testing{
+  background: #bd1c50;
+  padding: 15px;
+  color: white;
+  font-family: 'Lucida console';
+}
+#task-header-complete{
+  background: #86d34c;
+  padding: 15px;
+  color: white;
+  font-family: 'Lucida console';
+}
+
+.task-container{
+  overflow-y: auto;
+  background: #222;
+}
+.task{
+  font-family: 'Lucida console';
+  background: black;
+  color: white;
+  margin: 10px;
+  padding: 10px;
 }
