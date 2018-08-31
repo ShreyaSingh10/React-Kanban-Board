@@ -5,6 +5,7 @@ html , body,{
 }
 .parent-container{
   text-align: center;
+  overflow-y: hidden;
 }
 .header{
   margin:0;
@@ -30,13 +31,17 @@ html , body,{
   padding: 10px;
   background: orange;
 }
-.add-task{
-  text-align: left;
-  padding-left: 70px;
+.add{
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
-form{
+#form-task, #form-stage{
   display: inline;
-  margin: 11px;
+  margin: 0 10px;
 }
 .task-input{
   margin-top: 10px;
@@ -68,6 +73,21 @@ form{
     min-width: 200px;
     overflow:hidden;
     border-radius: 5px;
+    box-shadow: 3px 3px floralwhite;
+}
+.stage-header-name{
+  width:200px;
+  min-width: 100px;
+  margin-right: 10px;
+}
+.delete{
+  float: right;
+  background: red;
+  color: white;
+  width: 20px;
+  height: 20px;
+  padding-right: 14px;
+  border-radius: 10px;
 }
 #task-header-planning{
   background: #eee710;
@@ -98,22 +118,28 @@ form{
   font-size: 20px;
 }
 .task-header{
-  background: blue;
+  background: chocolate;
   padding: 15px;
   color: white;
   font-family: 'Lucida console';
   font-size: 20px;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .task-container{
   overflow-y: scroll;
   background: #222;
-  height: 600px;
+  padding-bottom: 10px;
+  height: 550px;
 }
 .task{
-  font-family: 'Lucida console';
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 16px;
   background: black;
   color: white;
   margin: 10px;
