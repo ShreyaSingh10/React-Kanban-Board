@@ -61,22 +61,30 @@ export default class AppDragDropDemo extends Component {
     })
   }
   handleSubmit = (e)=>{
-    e.preventDefault();
-    const new_task ={
+    e.preventDefault()
+    const task ={
       name: this.state.new_task,
       category:"planning"
     }
-    console.log("new_task",new_task);
+    console.log("new_task",task);
+    this.setState(prevstate => {
+      let previousState = prevstate.tasks;
+      previousState.push(task);
+      return {
+        tasks: previousState,
+        new_task:''
+      };
+    });
   }
 
   render() {
+    console.log("state state", this.state);
     var tasks = {
         planning: [],
         inProgress: [],
         testing:[],
         complete:[]
     }
-
     this.state.tasks.forEach ((t) => {
       tasks[t.category].push(
         <div key={t.name}
@@ -88,7 +96,6 @@ export default class AppDragDropDemo extends Component {
         </div>
       );
     });
-
     return (
       <div className="parent-container">
         <h2 className="header">Kanban Board</h2>
