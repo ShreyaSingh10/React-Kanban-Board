@@ -13,12 +13,14 @@ export default class AppDragDropDemo extends Component {
         {name:"Chjgj", category:"inProgress"},
         {name:"Dtrru", category:"testing"},
         {name:"Learn Vue", category:"complete"},
-        {name:"Learn ", category:"complete"},
+        {name:"Learn ", category:"complete"}
       ],
       task_name:'task_name',
       stage1:'stage1',
       stage2:'stage_2',
-      new_task:''
+      new_task:'',
+      new_stage:'',
+      stages:[]
   }
 
   onDragStart = (ev, id,cat) => {
@@ -54,14 +56,18 @@ export default class AppDragDropDemo extends Component {
     });
   }
 
-  handleChange= (e)=>{
+  handleTaskChange= (e)=>{
     console.log("value", e.target.value);
     this.setState({
       new_task: e.target.value
     })
   }
-  handleSubmit = (e)=>{
-    e.preventDefault()
+  handleSubmitTask = (e)=>{
+    e.preventDefault();
+    if(this.state.new_task.length <1){
+      alert("Enter task Name");
+      return;
+    }
     const task ={
       name: this.state.new_task,
       category:"planning"
@@ -76,6 +82,30 @@ export default class AppDragDropDemo extends Component {
       };
     });
   }
+  handleStageChange= (e)=>{
+    console.log("value", e.target.value);
+    this.setState({
+      new_stage: e.target.value
+    })
+  }
+  handleSubmitStage = (e)=>{
+    e.preventDefault();
+    if(this.state.new_stage.length <1){
+      alert("Enter stage Name");
+      return;
+    }
+    const stage = this.state.new_stage;
+    console.log("new_stage",stage);
+    this.setState(prevstate => {
+      let previousState = prevstate.stages;
+      previousState.push(stage);
+      return {
+        stages: previousState,
+        new_stage:''
+      };
+    });
+    alert(`Addding Stage ${stage}`);
+  }
 
   render() {
     console.log("state state", this.state);
@@ -83,8 +113,10 @@ export default class AppDragDropDemo extends Component {
         planning: [],
         inProgress: [],
         testing:[],
-        complete:[]
+        complete:[],
+        stages:[]
     }
+    var stages=[];
     this.state.tasks.forEach ((t) => {
       tasks[t.category].push(
         <div key={t.name}
@@ -96,6 +128,18 @@ export default class AppDragDropDemo extends Component {
         </div>
       );
     });
+    this.state.stages.forEach ((s) => {
+      console.log("s", s);
+      console.log("s", typeof(s));
+     stages.push(
+      <div className="stage"
+          onDragOver={(e)=>this.onDragOver(e)}
+          onDrop={(e)=>this.onDrop(e, s)}>
+          <div className="task-header">{s}</div>
+          <div className="task-container" >{tasks.s}</div>
+      </div>
+    );
+    });
     return (
       <div className="parent-container">
         <h2 className="header">Kanban Board</h2>
@@ -104,36 +148,41 @@ export default class AppDragDropDemo extends Component {
         </div>
         <div className="container">
           <div className="add-task">
-            <form onSubmit={this.handleSubmit}>
-              <input className="task-input" type="text" value={this.state.new_task} onChange={this.handleChange}></input>
+            <form onSubmit={this.handleSubmitTask}>
+              <input className="task-input" type="text" value={this.state.new_task} onChange={this.handleTaskChange}></input>
               <button className="add-button">Add new task</button>
+            </form>
+            <form onSubmit={this.handleSubmitStage}>
+              <input className="task-input" type="text" value={this.state.new_stage} onChange={this.handleStageChange}></input>
+              <button className="add-button">Add new stage</button>
             </form>
           </div>
           <div className="draggable-container">
-            <div className="planning"
+            <div className="stage"
                 onDragOver={(e)=>this.onDragOver(e)}
                 onDrop={(e)=>{this.onDrop(e, "planning")}}>
                 <div id="task-header-planning">Planning</div>
                 <div className="task-container" >{tasks.planning}</div>
             </div>
-            <div className="inProgress"
+            <div className="stage"
                 onDragOver={(e)=>this.onDragOver(e)}
                 onDrop={(e)=>this.onDrop(e, "inProgress")}>
                 <div id="task-header-progress">In-progress</div>
                 <div className="task-container" >{tasks.inProgress}</div>
             </div>
-            <div className="testing"
+            <div className="stage"
                 onDragOver={(e)=>this.onDragOver(e)}
                 onDrop={(e)=>this.onDrop(e, "testing")}>
                 <div id="task-header-testing">Testing</div>
                 <div className="task-container" >{tasks.testing}</div>
             </div>
-            <div className="complete"
+            <div className="stage"
                 onDragOver={(e)=>this.onDragOver(e)}
                 onDrop={(e)=>this.onDrop(e, "complete")}>
                 <div id="task-header-complete">Complete</div>
                 <div className="task-container" >{tasks.complete}</div>
             </div>
+            {stages}
           </div>
         </div>
       </div>
