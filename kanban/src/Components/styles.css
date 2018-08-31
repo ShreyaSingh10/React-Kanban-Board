@@ -1,0 +1,32 @@
+html , body,{
+  height: 100%;
+  width: 100%;
+  background: black;
+}
+.parent-container{
+  text-align: center;
+}
+.container{
+  text-align: center;
+  margin-top: 10px;
+  height:800px;
+  background: orange;
+}
+.header{
+  margin:0;
+  padding: 15px 0;
+  width: 100%;
+  background:black;
+  font-size: 70px;
+  text-shadow: 2px 2px lightgrey;
+  color:#363337;
+  font-family: 'Lucida console';
+}
+.message{
+  display: inline-block;
+  background: ghostwhite;
+  padding:10px 10px 10px 55px;
+  margin:0 0 -10px 0;
+  text-align: left;
+  font-family: 'Lucida console';
+}
