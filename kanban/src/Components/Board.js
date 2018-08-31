@@ -3,11 +3,13 @@ import './styles.css';
 
 export default class AppDragDropDemo extends Component {
     state = {
-        tasks: [
-            {name:"Learn Angular",category:"wip"},
-            {name:"React", category:"wip"},
-            {name:"Vue", category:"complete"}
-          ]
+      tasks: [
+          {name:"Learn Angular",category:"planning"},
+          {name:"React", category:"planning"},
+          {name:"Vue", category:"inProgress"},
+          {name:"Learn Angular", category:"testing"},
+          {name:"Learn Vue", category:"complete"}
+        ]
     }
 
     onDragStart = (ev, id) => {
@@ -37,8 +39,10 @@ export default class AppDragDropDemo extends Component {
 
     render() {
         var tasks = {
-            wip: [],
-            complete: []
+            planning: [],
+            inProgress: [],
+            testing:[],
+            complete:[]
         }
 
         this.state.tasks.forEach ((t) => {
@@ -54,23 +58,40 @@ export default class AppDragDropDemo extends Component {
         });
 
         return (
-            <div className="container-drag">
-                <h2 className="header">Kanban Board</h2>
-                <div className="wip"
+          <div className="parent-container">
+            <h2 className="header">Kanban Board</h2>
+            <div className="nav-bar">
+              <p className="message"><b>Task Status: {this.state.task_name} moved from {this.state.message_from} to {this.state.message_to}</b> </p>
+            </div>
+            <div className="container">
+              <div className="draggable-container">
+                <div className="planning"
                     onDragOver={(e)=>this.onDragOver(e)}
-                    onDrop={(e)=>{this.onDrop(e, "wip")}}>
-                    <span className="task-header">WIP</span>
-                    {tasks.wip}
+                    onDrop={(e)=>{this.onDrop(e, "planning")}}>
+                    <div className="task-header">Planning</div>
+                    <div className="task-container" >{tasks.planning}</div>
                 </div>
-                <div className="droppable"
+                <div className="inProgress"
+                    onDragOver={(e)=>this.onDragOver(e)}
+                    onDrop={(e)=>this.onDrop(e, "inProgress")}>
+                    <div className="task-header">In-progress</div>
+                    <div className="task-container" >{tasks.inProgress}</div>
+                </div>
+                <div className="testing"
+                    onDragOver={(e)=>this.onDragOver(e)}
+                    onDrop={(e)=>this.onDrop(e, "testing")}>
+                    <div className="task-header">In-progress</div>
+                    <div className="task-container" >{tasks.testing}</div>
+                </div>
+                <div className="complete"
                     onDragOver={(e)=>this.onDragOver(e)}
                     onDrop={(e)=>this.onDrop(e, "complete")}>
-                     <span className="task-header">COMPLETED</span>
-                     {tasks.complete}
+                    <div className="task-header">In-progress</div>
+                    <div className="task-container" >{tasks.complete}</div>
                 </div>
-
-
+              </div>
             </div>
+          </div>
         );
     }
 }
