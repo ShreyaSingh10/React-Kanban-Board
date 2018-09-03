@@ -107,14 +107,12 @@ html , body,{
   align-items: center;
   justify-content: center;
 }
-
 .task-container{
   overflow-y: scroll;
   background:#67647d;
   padding-bottom: 10px;
   height: 550px;
   border: 1px solid white;
-
 }
 .task{
   font-family: 'Montserrat', sans-serif !important;

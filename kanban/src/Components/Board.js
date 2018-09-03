@@ -193,7 +193,7 @@ export default class AppDragDropDemo extends Component {
         </div>
       );
       });
-      const { notification,notificationMessage,warning,warningMessage} = this.state;
+    const { notification,notificationMessage,warning,warningMessage} = this.state;
       //console.log(notification,notificationMessage);
     return (
       <div className="parent-container">
@@ -224,7 +224,6 @@ export default class AppDragDropDemo extends Component {
             {stages}
           </div>
         </div>
-
       </div>
     );
   }
