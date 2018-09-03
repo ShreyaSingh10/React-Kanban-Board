@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 
+
 export default class AppDragDropDemo extends Component {
   state = {
     tasks: [
@@ -13,17 +14,26 @@ export default class AppDragDropDemo extends Component {
         {name:"Task 7", category:"InProgress"},
         {name:"Task 8", category:"Testing"},
         {name:"Task 9", category:"Complete"},
-        {name:"Task1 0 ", category:"Comlete"},
+        {name:"Task 10 ", category:"Complete"},
         {name:"Task 11 ", category:"Co"}
       ],
       task_name:'Task_name',
-      stage1:'stage1',
+      stage1:'stage_1',
       stage2:'stage_2',
       new_task:'',
       new_stage:'',
-      stages:['Planning','InProgress','Testing','Complete']
+      stages:['Planning','InProgress','Testing','Complete'],
+      notification:false,
+      notificationMessage:'',
+      warning:false,
+      warningMessage:''
   }
-
+  dismissNotification = () => {
+    setTimeout( () => { this.setState( { notification:false } )},3000)
+  }
+  dismissWarning = () => {
+    setTimeout( () => { this.setState( { warning:false } )},4000)
+  }
   onDragStart = (ev, id,cat) => {
       //console.log('dragstart:',id);
       ev.dataTransfer.setData("id", id);
@@ -65,11 +75,19 @@ export default class AppDragDropDemo extends Component {
   handleSubmitTask = (e)=>{
     e.preventDefault();
     if(this.state.new_task.length <1){
-      return;
+      this.setState({
+        warning:true, warningMessage:"Task name cannot be empty"}, this.dismissWarning())
+        return;
     }
     if(this.state.new_task.length >100){
-      alert("Task name cannot be greater than 100 characters");
-      return;
+      this.setState({
+        warning:true, warningMessage:"Task name cannot be longer than 100 characters"}, this.dismissWarning())
+        return;
+    }
+    if(this.state.stages.length <1 || !this.state.stages.includes("Planning")){
+      this.setState({
+        warning:true, warningMessage:"Add Planning stage first"}, this.dismissWarning())
+        return;
     }
     const task ={
       name: this.state.new_task,
@@ -84,6 +102,8 @@ export default class AppDragDropDemo extends Component {
         new_task:''
       };
     });
+    this.setState({
+      notification:true, notificationMessage:"Addding new task to planning stage"}, this.dismissNotification())
   }
 
   handleStageChange= (e)=>{
@@ -96,13 +116,25 @@ export default class AppDragDropDemo extends Component {
   handleSubmitStage = (e)=>{
     e.preventDefault();
     if(this.state.new_stage.length <1){
-      alert("Enter stage Name");
-      return;
+      this.setState({
+        warning:true, warningMessage:"Stage name cannot be empty"}, this.dismissWarning())
+        return;
     }
-    if(this.state.new_stage.length >50){
-      alert("State name cannot be greater than 50 characters");
-      return;
-    }
+    this.state.stages.map((s)=>{
+      var first = this.state.new_stage.charAt(0);
+      if (first === first.toLowerCase() && first !== first.toUpperCase())
+      {
+        this.setState({
+          warning:true, warningMessage:"Stage names should start with uppercase letters follwed by lowercase letters"}, this.dismissWarning())
+          return;
+      }
+      else if(s === this.state.new_stage)
+      {
+        this.setState({
+          warning:true, warningMessage:"This stage alreday exists"}, this.dismissWarning())
+          return;
+      }
+    })
     const stage = this.state.new_stage;
     //console.log("new_stage",stage);
     this.setState(prevstate => {
@@ -113,7 +145,8 @@ export default class AppDragDropDemo extends Component {
         new_stage:''
       };
     });
-    alert(`Addding Stage ${stage}`);
+    this.setState({
+      notification:true, notificationMessage:`Addding Stage ${stage}`}, this.dismissNotification())
   }
 
   deleteStage = (s) =>{
@@ -129,13 +162,12 @@ export default class AppDragDropDemo extends Component {
   }
   render() {
     //console.log("state", this.state);
-    console.log(this.state.stages);
+    // console.log(this.state);
     var tasks = {};
     this.state.stages.forEach(item=>{
       tasks[item]=[]
     })
     this.state.tasks.forEach ((t) => {
-
         tasks[t.category]&&tasks[t.category].push(
           <div key={t.name}
               onDragStart = {(e) => this.onDragStart(e, t.name, t.category)}
@@ -161,9 +193,18 @@ export default class AppDragDropDemo extends Component {
         </div>
       );
       });
-
+      const { notification,notificationMessage,warning,warningMessage} = this.state;
+      //console.log(notification,notificationMessage);
     return (
       <div className="parent-container">
+        {notification && <div className="notification">
+          {notificationMessage}
+          </div>
+        }
+        {warning && <div className="warning">
+          {warningMessage}
+          </div>
+        }
         <h2 className="header">Kanban Board</h2>
         <div className="nav-bar">
           <p className="message"><b>Task Status: {this.state.task_name} moved from {this.state.stage1} to {this.state.stage2}</b> </p>
@@ -183,6 +224,7 @@ export default class AppDragDropDemo extends Component {
             {stages}
           </div>
         </div>
+
       </div>
     );
   }

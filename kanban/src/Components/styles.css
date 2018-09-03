@@ -5,32 +5,31 @@ html , body,{
 }
 .parent-container{
   text-align: center;
-  overflow-y: hidden;
 }
 .header{
   margin:0;
   padding: 15px 0;
   width: 100%;
-  background:black;
   font-size: 70px;
-  text-shadow: 2px 2px lightgrey;
-  color:black;
-  background-image: linear-gradient(to bottom, black , grey);
+  text-shadow: 3px 3px #67647d;
+  color:#bdc7d8;
+  background:rgb(16,16,44);
   font-family: 'Lucida console';
 }
 .nav-bar{
   height: 40px;
+  background: #bdc7d8;
 }
 .message{
   display: inline-block;
-  background: cornsilk;
+  background: #bdc7d8;
   font-family: 'Lucida console';
   padding: 10px;
   margin-top: 1px;
 }
 .container{
   padding: 10px;
-  background-image: linear-gradient(to bottom, black , grey);
+  background:white;
 }
 .add{
   text-align: center;
@@ -49,15 +48,15 @@ html , body,{
   width: 460px;
   height: 30px;
   font-size: 15px;
+  background:#bdc7d8 ;
 }
 .add-button{
   width: 150px;
-  height:36px;
+  height:38px;
   font-size: 20px;
-  background: black;
   color: white;
   font-family: 'Lucida console';
-  background-image: linear-gradient(to bottom, black , rgb(48,48,48));
+  background:#10102c;
 }
 .draggable-container{
   margin-top: 10px;
@@ -74,15 +73,17 @@ html , body,{
     background: #222;
     height: 580px;
     margin: 10px;
-    width: 500px;
-    min-width: 300px;
+    width: 335px;
+    min-width: 335px;
+    max-width: 335px;
     overflow-y:hidden;
     border-radius: 5px;
 }
 .stage-header-name{
   width:200px;
   min-width: 100px;
-  margin-right: 10px;
+  margin-right: 50px;
+  text-align: left;
 }
 .delete{
   float: right;
@@ -94,7 +95,7 @@ html , body,{
   border-radius: 10px;
 }
 .task-header{
-  background-image: linear-gradient(to right, red , yellow);
+  background:#10102c;
   padding: 15px;
   color: white;
   font-family: 'Lucida console';
@@ -109,18 +110,42 @@ html , body,{
 
 .task-container{
   overflow-y: scroll;
-  background: rgb(88,88,88);
+  background:#67647d;
   padding-bottom: 10px;
   height: 550px;
   border: 1px solid white;
+
 }
 .task{
   font-family: 'Montserrat', sans-serif !important;
   font-size: 16px;
-  background-image: linear-gradient(to bottom, black , rgb(48,48,48));
-  color: white;
+  background:#bdc7d8;
+  color: #10102c;
   margin: 10px;
   padding: 30px 15px;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  text-align: left;
+}
+.notification{
+    background:#56c596;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 20px 10px 0 10px;
+    color: white;
+    width: 300px;
+    height: 50px;
+    z-index: 101;
+    position: fixed;
+}
+.warning{
+    background:	#c73c25;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 20px 10px 0 10px;
+    color: white;
+    width: 300px;
+    height: 50px;
+    z-index: 101;
+    position: fixed;
 }
