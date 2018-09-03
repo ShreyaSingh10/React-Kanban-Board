@@ -4,24 +4,24 @@ import './styles.css';
 export default class AppDragDropDemo extends Component {
   state = {
     tasks: [
-        {name:"Task 1",category:"planning"},
-        {name:"Task 2", category:"planning"},
-        {name:"Task 3", category:"inProgress"},
-        {name:"Task 4", category:"testing"},
-        {name:"Task 5",category:"planning"},
-        {name:"Task 6", category:"planning"},
-        {name:"Task 7", category:"inProgress"},
-        {name:"Task 8", category:"testing"},
-        {name:"Task 9", category:"complete"},
-        {name:"Task1 0 ", category:"comlete"},
-        {name:"Task 11 ", category:"co"}
+        {name:"Task 1",category:"Planning"},
+        {name:"Task 2", category:"Planning"},
+        {name:"Task 3", category:"InProgress"},
+        {name:"Task 4", category:"Testing"},
+        {name:"Task 5",category:"Planning"},
+        {name:"Task 6", category:"Planning"},
+        {name:"Task 7", category:"InProgress"},
+        {name:"Task 8", category:"Testing"},
+        {name:"Task 9", category:"Complete"},
+        {name:"Task1 0 ", category:"Comlete"},
+        {name:"Task 11 ", category:"Co"}
       ],
       task_name:'Task_name',
       stage1:'stage1',
       stage2:'stage_2',
       new_task:'',
       new_stage:'',
-      stages:['planning','inProgress','testing','complete']
+      stages:['Planning','InProgress','Testing','Complete']
   }
 
   onDragStart = (ev, id,cat) => {
@@ -65,7 +65,6 @@ export default class AppDragDropDemo extends Component {
   handleSubmitTask = (e)=>{
     e.preventDefault();
     if(this.state.new_task.length <1){
-      alert("Enter task name");
       return;
     }
     if(this.state.new_task.length >100){
@@ -74,7 +73,7 @@ export default class AppDragDropDemo extends Component {
     }
     const task ={
       name: this.state.new_task,
-      category:"planning"
+      category:"Planning"
     }
     //console.log("new_task",task);
     this.setState(prevstate => {
@@ -181,30 +180,6 @@ export default class AppDragDropDemo extends Component {
             </form>
           </div>
           <div className="draggable-container">
-            {/* <div className="stage"
-                onDragOver={(e)=>this.onDragOver(e)}
-                onDrop={(e)=>{this.onDrop(e, "planning")}}>
-                <div id="task-header-planning">Planning</div>
-                <div className="task-container" >{tasks.planning}</div>
-            </div>
-            <div className="stage"
-                onDragOver={(e)=>this.onDragOver(e)}
-                onDrop={(e)=>this.onDrop(e, "inProgress")}>
-                <div id="task-header-progress">In-progress</div>
-                <div className="task-container" >{tasks.inProgress}</div>
-            </div>
-            <div className="stage"
-                onDragOver={(e)=>this.onDragOver(e)}
-                onDrop={(e)=>this.onDrop(e, "testing")}>
-                <div id="task-header-testing">Testing</div>
-                <div className="task-container" >{tasks.testing}</div>
-            </div>
-            <div className="stage"
-                onDragOver={(e)=>this.onDragOver(e)}
-                onDrop={(e)=>this.onDrop(e, "complete")}>
-                <div id="task-header-complete">Complete</div>
-                <div className="task-container" >{tasks.complete}</div>
-            </div> */}
             {stages}
           </div>
         </div>
