@@ -13,14 +13,15 @@ export default class AppDragDropDemo extends Component {
         {name:"Task 7", category:"inProgress"},
         {name:"Task 8", category:"testing"},
         {name:"Task 9", category:"complete"},
-        {name:"Task1 0 ", category:"complete"}
+        {name:"Task1 0 ", category:"comlete"},
+        {name:"Task 11 ", category:"co"}
       ],
       task_name:'Task_name',
       stage1:'stage1',
       stage2:'stage_2',
       new_task:'',
       new_stage:'',
-      stages:[]
+      stages:['planning','inProgress','testing','complete']
   }
 
   onDragStart = (ev, id,cat) => {
@@ -127,19 +128,16 @@ export default class AppDragDropDemo extends Component {
     })
     //console.log("new state", this.state.stages);
   }
-
   render() {
     //console.log("state", this.state);
-    var tasks = {
-        planning: [],
-        inProgress: [],
-        testing:[],
-        complete:[],
-    }
-    var stages=[];
+    console.log(this.state.stages);
+    var tasks = {};
+    this.state.stages.forEach(item=>{
+      tasks[item]=[]
+    })
+    this.state.tasks.forEach ((t) => {
 
-      this.state.tasks.forEach ((t) => {
-        tasks[t.category].push(
+        tasks[t.category]&&tasks[t.category].push(
           <div key={t.name}
               onDragStart = {(e) => this.onDragStart(e, t.name, t.category)}
               draggable
@@ -150,6 +148,7 @@ export default class AppDragDropDemo extends Component {
         );
       });
 
+      var stages=[];
       this.state.stages.forEach ((s) => {
        stages.push(
         <div className="stage"
@@ -159,7 +158,7 @@ export default class AppDragDropDemo extends Component {
               <span className="stage-header-name">{s}</span>
               <button className="delete" onClick={()=>this.deleteStage(s)}> X </button>
             </div>
-            <div className="task-container" >{tasks.s}</div>
+            <div className="task-container" >{tasks[s]}</div>
         </div>
       );
       });
@@ -182,7 +181,7 @@ export default class AppDragDropDemo extends Component {
             </form>
           </div>
           <div className="draggable-container">
-            <div className="stage"
+            {/* <div className="stage"
                 onDragOver={(e)=>this.onDragOver(e)}
                 onDrop={(e)=>{this.onDrop(e, "planning")}}>
                 <div id="task-header-planning">Planning</div>
@@ -205,7 +204,7 @@ export default class AppDragDropDemo extends Component {
                 onDrop={(e)=>this.onDrop(e, "complete")}>
                 <div id="task-header-complete">Complete</div>
                 <div className="task-container" >{tasks.complete}</div>
-            </div>
+            </div> */}
             {stages}
           </div>
         </div>
